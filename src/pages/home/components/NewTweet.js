@@ -1,48 +1,101 @@
 import { Button, Grid, IconButton } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import useStyles from "../styles";
 import classnames from "classnames";
+import axios from "axios";
+import { newTweetRequest } from "../../../api/api_tweet";
+import { toast } from "react-toastify";
+import { updateHashTagList, useTweetDispatch, useTweetState } from "../../../context/TweetContext";
+import {setTweetText as setTweet} from "../../../context/TweetContext"
 
-const NewTweet = () => {
 
+
+
+
+const NewTweet = ({updateTweets}) => {
+    const inputRef = React.useRef();
+    const {tweetText:tweet} = useTweetState();
+    const tweetDispatch = useTweetDispatch();
+  //  const [tweet,setTweet] = useState();
+   const [imageFile,setImageFile] = useState();
+   const [imagePath,setImagePath] = useState();
    
 
-//     const input = React.useRef();
-//    const [tweet,setTweet] = React.useState();
 
-//    const renderTweet = (text)=>{
-//     return {__html:text.replace(/#\S+/g , "<span  style='color:cornflowerblue'>$&</span>" )}
-// }
+    const newTweetClick = ()=>{
+      const tweetText = tweet;
+      if(!tweetText)
+      return;
+      const formData = new FormData();
+      formData.append("text",tweetText);
+      if(imageFile)
+      formData.append("image",imageFile);
+      newTweetRequest(formData,(isOk,data)=>{
+        if (!isOk)
+        return toast.error(data)
+        toast.success("ارسال شد توییت شما")
+        updateTweets();
+        setTweet(tweetDispatch,"");
+        setImagePath();
+        setImageFile();
+        if(tweetText.includes("#"))
+        updateHashTagList(tweetDispatch)
+      })
 
-    // React.useEffect(()=>{
-    //     input.current.addEventListener("input", function(e){
-    //         console.log("input event fired",e.target.innerText);
-    //         setTweet({renderTweet(e.target.innerText)})
-    //         window.cursorManager.setEndOfContenteditable(e.target);
-    //     },false);
-    // },[])
+    };
+
+    const getImage = ()=>{
+      
+      if(localStorage.getItem("image") && localStorage.getItem("image") !== 'undefined')
+      return localStorage.getItem("image");
+      return "/images/person.png"
+  
+    }
+    const selectImg = ()=>{
+      inputRef.current.click()
+
+    }
+    
+    const onchangeImg = (e)=>{
+      if(e.target.files && e.target.files.length>0){
+        setImageFile(e.target.files[0]);
+
+        const reader = new FileReader();
+        reader.onload = (e)=>{
+          setImagePath(e.target.result);
+        };
+        reader.readAsDataURL(e.target.files[0])
+
+      }
+
+
+    }
+  
+
   const classes = useStyles();
   return (
     <div className={classes.newTweet}>
       <Grid container>
-        <img src={"images/user img.png"} style={{ width: "max-content" }} />
-        <div
-          contentEditable
-          className={classnames(classes.input, "editable")}
-          data-placeholder=" توییت کن ..."
-        //    ref={input}
-        //   dangerouslySetInnerHTML={tweet}
-        />
+        <img src={getImage} style={{ width: "max-content" }} />
+        <input placeholder={"توییت کن ..."} className={classnames(classes.input)} value={tweet} onChange={e=>setTweet(tweetDispatch,e.target.value)} />
+        <input type={"file"} style={{display:"none"}} ref={inputRef} onChange={onchangeImg}/>
       </Grid>
+      {imagePath &&
+
+      <div>
+        <div style={{backgroundImage:`url(${imagePath})`}} className={classes.tweetImg}></div>
+        </div>
+      }
       <Grid container direction={"row-reverse"} style={{ marginTop: 16 }}>
         <Button
           variant={"contained"}
           color={"primary"}
           className={classes.newTweetBtn}
+          onClick={newTweetClick}
         >
-          توییت
+          {"توییت"}
         </Button>
-        <IconButton className={classes.newTweetImgBtn}>
+        <IconButton className={classes.newTweetImgBtn} onClick={selectImg}>
           <img src={"images/tweetpic.png"} className={classes.newTweetImg} />
         </IconButton>
       </Grid>

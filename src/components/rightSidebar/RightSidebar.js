@@ -1,20 +1,28 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { ButtonBase, Grid, Typography } from "@material-ui/core";
 import useStyles from "./styles";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { getHashTags } from "../../api/api_tweet";
+import { setHashTagList, useTweetDispatch, useTweetState } from "../../context/TweetContext";
 
-const hashTag = [
-  "سامسونگ",
-  "پرچم ــ دار ــ جدید",
-  "کرونا",
-  "سامر ــ تایم",
-  "سامسونگ",
-  "پرچم ــ دار ــ جدید",
-  "کرونا",
-  "سامر ــ تایم",
-];
+
 
 const RightSidebar = () => {
+
+
+  
+  const {hashTags} = useTweetState();
+  const tweetDispatch = useTweetDispatch();
+  const [users, setusers] = useState([]);
+  useEffect(() => {
+    getHashTags((isOk,data)=>{
+        if(!isOk)
+        return alert("ناموفق بود")
+        setHashTagList(tweetDispatch,data);
+    })
+  }, []);
+
   const classes = useStyles();
 
   return (
@@ -25,18 +33,18 @@ const RightSidebar = () => {
           <img src={"/images/logo.png"} />
         </Grid>
         <Grid item>
-          <Typography className={classes.logoType}>توییتر فارسی</Typography>
+          <Typography className={classes.logoType}>{"توییتر فارسی"}</Typography>
         </Grid>
       </Grid>
       </Link>
-      <Typography className={classes.hashTagTitle}>هشتگ های داغ</Typography>
+      <Typography className={classes.hashTagTitle}>{"داغ ترین هشتگ ها"}</Typography>
       <Grid container direction={"column"} alignItems={"center"}>
-        {hashTag.map((item) => (
+        {hashTags.map((item) => (
           <ButtonBase className={classes.hashTagParent}>
-            <Link to={"/hashtags/"+item} style={{width:'100%'}}>
+            <Link to={"/hashtags/"+item.text} style={{width:'100%'}}>
             <Grid item container>
               <img src={"/images/hashtag.png"} />
-              <Typography className={classes.hashtag}> {item}</Typography>
+              <Typography className={classes.hashtag}> {item.text}</Typography>
             </Grid>
           </Link>
           </ButtonBase>

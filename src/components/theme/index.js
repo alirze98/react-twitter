@@ -15,7 +15,11 @@ const theme = createMuiTheme({
       root: {
         fontFamily: "shabnam !important",
       },
-    },
+    },MuiButton:{
+      label:{
+        fontFamily: "shabnam !important",
+      }
+    }
   },
 });
 

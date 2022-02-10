@@ -5,7 +5,10 @@ const useStyles = makeStyles( theme=>({
     root:{
         backgroundColor:'white',
         width:'18%',
-        padding:'1.5rem 1rem'
+        padding:'1.5rem 1rem',
+        [theme.breakpoints.down('sm')]:{
+            width:'100%'
+        },
     },
     logoType:{
         fontSize:'1.25rem !important',

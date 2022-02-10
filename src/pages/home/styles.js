@@ -75,6 +75,13 @@ const useStyles = makeStyles(Theme=>({
     color:Theme.palette.text.hint,
     marginLeft:'0.5rem'
   },
+  tweetImg:{
+    width:'10rem' ,
+     height:'10rem',
+    marginTop:'1rem',
+    backgroundSize:'contain',
+    backgroundRepeat:'no-repeat'
+  }
   
 }));
 

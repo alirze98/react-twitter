@@ -20,7 +20,19 @@ const useStyles = makeStyles({
     content:{
         flex: 1,
     overflowY:'auto',
-    background:'white'
+    background:'white',
+    overflowX:'hidden'
+    },
+    waitParent:{
+        display:'flex',
+        flexDirection:'column',
+        alignItems:'center',
+        justifyContent:'center',
+        position:'absolute',
+        top:0,
+        left:0,
+        width:'100%',
+        height:'100vh'
     }
     
 });

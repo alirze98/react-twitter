@@ -6,7 +6,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     width: "25%",
     padding: "1.5rem 2rem",
+    [theme.breakpoints.down('xs')]:{
+      width:'80%'
   },
+  },
+
   profText: {
     marginLeft: "0.5rem",
     width: "max-content",
@@ -15,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   tweeterNameParent:{
     marginRight: "0.5rem !important",
     width: "max-content !important",
+    alignItems:"flex-start"
   },
   profName: {
     flex: 1,
@@ -37,6 +42,11 @@ const useStyles = makeStyles((theme) => ({
   },
   tweeterParent:{
       padding:'10px 0'
+  },
+  twitterImg:{
+    width:50,
+    height:50,
+    borderRadius:'50%'
   }
 }));
 
