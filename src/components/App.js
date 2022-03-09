@@ -11,11 +11,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { TweetProvider } from "../context/TweetContext";
 import '../i18n'
 import { LayoutProvider } from "../context/LayoutContext";
+import { HashRouter } from "react-router-dom";
 
 const App = () => {
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <Switch>
           <PublicRoute path={"/login"} component={AuthPage} />
           <PrivateRoute
@@ -40,7 +41,7 @@ const App = () => {
             )}
           />
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
       <ToastContainer/>
     </>
   );
