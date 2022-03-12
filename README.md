@@ -1,6 +1,5 @@
 # react twitter app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## project description
 
@@ -13,7 +12,21 @@ in this react application you can tweet different types of messages.you can send
 - context for state management.
 
 
-### `npm start`
+## Install and Run 
+For setting up React in our local system, the first step is to Install NodeJs and npm.
+#### Install Create-React-App Tool
+The next step is to install a tool called create-react-app using NPM. This tool is used to create react applications easily from our system.`npm install -g create-react-app` 
+
+#### Creating a new react project
+After create-react-app is installed, we can create our first react application using the following command.
+`create-react-app test-project` 
+
+#### Running the React Application
+Let's do CD to the Project we have created and run it locally on our system using npm start. Launch the browser and visit http://localhost:3000.
+`npm start`
+
+
+
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
