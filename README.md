@@ -7,10 +7,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 in this react application you can tweet different types of messages.you can send text or image to timeline and others see your tweet.also they can like and retweet your tweet.it is possible to filter tweets based on hashtags and users.you can set porfile for you account and change it whenever you want.i use Login authentication in this app so you have to register first to use it . i have to say tweets and users, hashtags and likes are shown dinamically from server.
 
 ### technologies 
--functional component and hooks.
--[react-router-dom](https://reactrouter.com/docs/en/v6/getting-started/overview) for routing pages. 
--axios for connect to server.
--context for state management.
+- functional component and hooks.
+- [react-router-dom](https://reactrouter.com/docs/en/v6/getting-started/overview) for routing pages. 
+- axios for connect to server.
+- context for state management.
 
 
 ### `npm start`
